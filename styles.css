@@ -308,8 +308,57 @@ section { position: relative; }
   border-radius: 20px;
   padding: 38px 32px 34px;
   display: flex; flex-direction: column;
+  position: relative;
+  overflow: hidden;
   transition: transform .4s var(--ease), box-shadow .4s var(--ease), border-color .4s;
 }
+/* foto de fundo com overlay que preserva a paleta */
+.serv::before {
+  content: "";
+  position: absolute; inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity .5s var(--ease);
+  z-index: 0;
+  border-radius: inherit;
+}
+.serv::after {
+  content: "";
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  z-index: 1;
+  pointer-events: none;
+}
+.serv > * { position: relative; z-index: 2; }
+
+/* card 1 — Psicoterapia Individual: ambiente acolhedor, poltrona e luz quente */
+.serv:nth-child(1)::before {
+  background-image: url("https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=700&q=75&fit=crop");
+}
+.serv:nth-child(1)::after {
+  background: linear-gradient(160deg, rgba(251,245,237,.92) 0%, rgba(234,219,204,.88) 100%);
+}
+
+/* card 2 — Grupo de Emagrecimento: mulheres em roda, bem-estar coletivo */
+.serv.feature::before {
+  background-image: url("https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=700&q=75&fit=crop");
+}
+.serv.feature::after {
+  background: linear-gradient(160deg, rgba(49,31,25,.88) 0%, rgba(49,31,25,.78) 100%);
+}
+
+/* card 3 — Acompanhamento Online: laptop em ambiente doméstico e aconchegante */
+.serv:nth-child(3)::before {
+  background-image: url("https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=700&q=75&fit=crop");
+}
+.serv:nth-child(3)::after {
+  background: linear-gradient(160deg, rgba(251,245,237,.92) 0%, rgba(234,219,204,.88) 100%);
+}
+
+/* revela a foto ao hover */
+.serv:hover::before { opacity: 1; }
+
 .serv:hover { transform: translateY(-6px); box-shadow: 0 34px 60px -40px rgba(49,31,25,.55); border-color: var(--sage-soft); }
 .serv .ico {
   width: 52px; height: 52px; border-radius: 14px;
@@ -331,6 +380,8 @@ section { position: relative; }
   position: relative;
   box-shadow: 0 40px 70px -40px rgba(49,31,25,.85);
 }
+/* foto visível sempre no card destaque, não apenas no hover */
+.serv.feature::before { opacity: 1; }
 .serv.feature:hover { transform: translateY(-6px); }
 .serv.feature .ico { background: rgba(255,255,255,.14); color: #fff; }
 .serv.feature h3 { color: #fff; }
